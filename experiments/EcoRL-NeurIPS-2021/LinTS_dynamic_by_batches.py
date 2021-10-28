@@ -1,16 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from bandits_rlglue.CMAB.replay_env import ReplayEnvironment
-from bandits_rlglue.CMAB.LinTS import LinTSAgent
+from CMAB.replay_env import ReplayEnvironment
+from CMAB.LinTS import LinTSAgent
 from utilities.plot_script import smooth
 from utilities.run_experiment import run_experiment
 
 
 num_experiments = 20
-data_dir = 'C:/Users/provo501/Documents/assignment/data/preprocessed_data.pkl'
+data_dir = 'C:/Users/provo501/Documents/assignment/data/preprocessed_hidden_data.pickle'
 env_info = {'pickle_file': data_dir}
-output_dir = 'contextual/TS/dynamic_by_batches'
+output_dir = 'LinTS/dynamic_by_batches'
 
 agent_info = {'alpha': 1,
               'num_actions': 3,
@@ -58,7 +58,7 @@ plt.plot(batch_sizes, actual_regret, label='actual regret')
 plt.plot(batch_sizes, [mean_smoothed_leveled_result[-1]]*len(batch_sizes), label='online policy')
 plt.plot(batch_sizes, upper_bound, label='dumb policy')
 plt.legend()
-plt.title("Tape transformation as a f-n of batch size (each point is averaged over {} runs)".format(num_experiments))
+plt.title("Reward as a f-n of batch size (each point is averaged over {} runs)".format(num_experiments))
 plt.xlabel('batch size (log scale)')
 plt.ylabel('reward')
 plt.grid(b=True, which='major', linestyle='--', alpha=0.5)

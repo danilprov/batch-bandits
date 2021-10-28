@@ -1,10 +1,8 @@
-#!/usr/bin/env python
 
 """Abstract environment base class for RL-Glue-py.
 """
 
 from __future__ import print_function
-
 from abc import ABCMeta, abstractmethod
 
 

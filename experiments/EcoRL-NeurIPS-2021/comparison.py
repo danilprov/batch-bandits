@@ -6,7 +6,6 @@ from utilities.plot_script import smooth
 
 models = {'TS': {}, 'UCB': {}}
 name = 'dyn_by_batch_'
-# expirements = [[0.7, 0.5], [0.7, 0.4], [0.7, 0.1]]
 expirements = {'env1': [0.7, 0.5], 'env2': [0.7, 0.4], 'env3': [0.7, 0.1],
                'env4': [0.35, 0.18, 0.47, 0.61],
                'env5': [0.4, 0.75, 0.57, 0.49], 'env6': [0.7, 0.5, 0.3, 0.1], }

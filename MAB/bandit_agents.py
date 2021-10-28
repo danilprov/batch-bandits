@@ -61,24 +61,12 @@ class Agent(BaseAgent):
         return self.last_action
 
     def agent_end(self, reward):
-        """Run when the agent terminates.
-        Args:
-            reward (float): the reward the agent received for entering the
-                terminal state.
-        """
         pass
 
     def agent_cleanup(self):
-        """Cleanup done after the agent ends."""
         pass
 
     def agent_message(self, message):
-        """A function used to pass information from the agent to the experiment.
-        Args:
-            message: The message passed to the agent.
-        Returns:
-            The response (or answer) to the message.
-        """
         pass
 
 
@@ -97,11 +85,11 @@ def argmax(q_values):
             top_value = q_values[i]
         elif q_values[i] == top_value:
             ties.append(i)
+
     return np.random.choice(ties)
 
 
 class GreedyAgent(Agent):
-
     def __init__(self):
         super().__init__()
 
@@ -132,14 +120,12 @@ class GreedyAgent(Agent):
             self.q_values = self.q_values_oracle.copy()
 
         current_action = argmax(self.q_values)
-
         self.last_action = current_action
 
         return current_action
 
 
 class EpsilonGreedyAgent(Agent):
-
     def __init__(self):
         super().__init__()
         self.epsilon = None
@@ -198,18 +184,6 @@ class UCBAgent(Agent):
         self.upper_bounds = np.sqrt(np.log(np.sum(self.arm_count)) / self.arm_count)
 
     def agent_step(self, reward, observation):
-        """
-        Takes one step for the agent. It takes in a reward and observation and
-        returns the action the agent chooses at that time step.
-
-        Arguments:
-        reward -- float, the reward the agent received from the environment after taking the last action.
-        observation -- float, the observed state the agent is in. Do not worry about this as you will not use it
-                              until future lessons
-        Returns:
-        current_action -- int, the action chosen by the agent at the current time step.
-        """
-
         a = self.last_action
 
         self.arm_count[a] += 1

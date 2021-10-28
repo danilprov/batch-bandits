@@ -2,12 +2,12 @@ import numpy as np
 import pickle
 import os
 
-from MAB.bandit_agents import UCBAgent
+from MAB.bandit_agents import TSAgent
 from MAB.k_arm_env import Environment
 from MAB.wrapper import BanditWrapper
 
 
-model_dir = '../experiments/results/UCB/dynamic_by_batches'
+model_dir = '../results/TS/dynamic_by_batches'
 if not os.path.exists(model_dir):
     print(f'Creating a new model directory: {model_dir}')
     os.makedirs(model_dir)
@@ -32,11 +32,10 @@ for arms_values in environments:
                 "reward_type": reward_type,
                 "arms_values": arms_values}
     env = Environment
-    agent = UCBAgent
-    alpha = 1
+    agent = TSAgent
 
     # run online agent
-    agent_info_online = {"num_actions": k, "batch_size": 1, "alpha": alpha}
+    agent_info_online = {"num_actions": k, "batch_size": 1}
     experiment = BanditWrapper(env, agent)
     online_regret = experiment.get_average_performance(agent_info_online, env_info, exper_info)
 
@@ -46,7 +45,7 @@ for arms_values in environments:
     upper_bound = []
 
     for batch in batches:
-        agent_info_batch = {"num_actions": k, "batch_size": batch, "alpha": alpha}
+        agent_info_batch = {"num_actions": k, "batch_size": batch}
         experiment = BanditWrapper(env, agent)
         batch_regret = experiment.get_average_performance(agent_info_batch, env_info, exper_info)
         actual_regret.append(batch_regret[-1])
@@ -54,7 +53,7 @@ for arms_values in environments:
         upper_bound.append(online_regret[M] * batch)
 
     # save data
-    name = 'dyn_by_batch_' + str(arms_values)
+    name = 'dyn_by_batch_' + str(k) + str(arms_values)
     name1 = name + ' batch_regret'
     with open(model_dir + '/' + name1 + '.pickle', 'wb') as handle:
         pickle.dump(actual_regret, handle, protocol=pickle.HIGHEST_PROTOCOL)

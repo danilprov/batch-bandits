@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 """An abstract class that specifies the Agent API for RL-Glue-py.
 """

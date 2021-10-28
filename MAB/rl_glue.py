@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Glues together an experiment, agent, and environment.
 """
 

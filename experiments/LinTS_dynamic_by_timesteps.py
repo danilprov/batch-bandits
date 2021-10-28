@@ -1,28 +1,30 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from bandits_rlglue.CMAB.replay_env import ReplayEnvironment
-from bandits_rlglue.CMAB.LinUCB import LinUCBAgent
+from CMAB.replay_env import ReplayEnvironment
+from CMAB.LinTS import LinTSAgent
 from utilities.plot_script import smooth
 from utilities.run_experiment import run_experiment
 
-num_experiments = 20
+num_experiments = 10
 batch_size = 100
-data_dir = 'C:/Users/provo501/Documents/assignment/data/preprocessed_data.pkl'
+data_dir = 'C:/Users/provo501/Documents/assignment/data/preprocessed_hidden_data.pickle'
 env_info = {'pickle_file': data_dir}
-output_dir = 'contextual/dynamic_by_timesteps'
+output_dir = 'LinTS/dynamic_by_timesteps'
 
-agent_info = {'alpha': 2,
+agent_info = {'alpha': 1,
               'num_actions': 3,
               'seed': 1,
-              'batch_size': 1}
-agent_info_batch = {'alpha': 2,
+              'batch_size': 1,
+              'replay_buffer_size': 100000}
+agent_info_batch = {'alpha': 1,
                     'num_actions': 3,
                     'seed': 1,
-                    'batch_size': batch_size}
+                    'batch_size': batch_size,
+                    'replay_buffer_size': 100000}
 experiment_parameters = {"num_runs": num_experiments}
 
-agent = LinUCBAgent
+agent = LinTSAgent
 environment = ReplayEnvironment
 
 online_result = run_experiment(environment, agent, env_info, agent_info,
@@ -39,7 +41,7 @@ mean_smoothed_leveled_result1 = np.mean(smoothed_leveled_result1, axis=0)
 num_steps = np.minimum(len(mean_smoothed_leveled_result), len(mean_smoothed_leveled_result1))
 update_points = np.ceil(np.arange(num_steps) / batch_size).astype(int)
 
-pic_filename = "results/{}/UCB_transform_timesteps.png".format(output_dir)
+pic_filename = "results/{}/TS_transform_timesteps.png".format(output_dir)
 plt.plot(mean_smoothed_leveled_result1, lw=3, label='batch, batch size = ' + str(batch_size))
 plt.plot(mean_smoothed_leveled_result, lw=3, ls='-.', label='online policy')
 plt.plot(mean_smoothed_leveled_result[update_points], lw=3, ls='-.', label='dumb policy')

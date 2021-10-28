@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from basics.base_environment import BaseEnvironment
 

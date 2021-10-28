@@ -1,30 +1,28 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from bandits_rlglue.CMAB.replay_env import ReplayEnvironment
-from bandits_rlglue.CMAB.LinTS import LinTSAgent
+from CMAB.replay_env import ReplayEnvironment
+from CMAB.LinUCB import LinUCBAgent
 from utilities.plot_script import smooth
 from utilities.run_experiment import run_experiment
 
-num_experiments = 10
+num_experiments = 20
 batch_size = 100
-data_dir = 'C:/Users/provo501/Documents/assignment/data/preprocessed_data.pkl'
+data_dir = 'C:/Users/provo501/Documents/assignment/data/preprocessed_hidden_data.pickle'
 env_info = {'pickle_file': data_dir}
-output_dir = 'contextual/TS/dynamic_by_timesteps'
+output_dir = 'LinUCB/dynamic_by_timesteps'
 
-agent_info = {'alpha': 1,
+agent_info = {'alpha': 2,
               'num_actions': 3,
               'seed': 1,
-              'batch_size': 500,
-              'replay_buffer_size': 100000}
-agent_info_batch = {'alpha': 1,
+              'batch_size': 1}
+agent_info_batch = {'alpha': 2,
                     'num_actions': 3,
                     'seed': 1,
-                    'batch_size': batch_size,
-                    'replay_buffer_size': 100000}
+                    'batch_size': batch_size}
 experiment_parameters = {"num_runs": num_experiments}
 
-agent = LinTSAgent
+agent = LinUCBAgent
 environment = ReplayEnvironment
 
 online_result = run_experiment(environment, agent, env_info, agent_info,
