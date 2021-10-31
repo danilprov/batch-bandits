@@ -17,7 +17,7 @@ The project is built upon [RL-GLue](https://sites.google.com/a/rl-community.org/
 
 Version | Algorithm | Comment
 ------------ | ------------- | ------------- 
-MAB | $epsilon - greedy | -
+MAB | ε - greedy | -
 MAB | Thompson Sampling | -
 MAB | UCB | -
 CMAB | LinTS | see [link](https://gdmarmerola.github.io/ts-for-contextual-bandits/) (and references therein) for more details
