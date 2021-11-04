@@ -1,7 +1,7 @@
 # batch-bandits
 Implementation of popular bandit algorithms in batch environments. 
 
-Source code to our paper ["The Impact of Batch Learning in Stochastic Bandits"](https://arxiv.org/abs/2111.02071) accepted at the workshop on the [Ecological Theory of Reinforcement Learning](https://sites.google.com/view/ecorl2021/home?authuser=0), NeurIPS 2021
+Source code to our paper ["The Impact of Batch Learning in Stochastic Bandits"](https://arxiv.org/abs/2111.02071) accepted at the workshop on the [Ecological Theory of Reinforcement Learning](https://sites.google.com/view/ecorl2021/home?authuser=0), NeurIPS 2021.
 
 ## Overview
 
