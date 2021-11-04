@@ -1,6 +1,8 @@
 # batch-bandits
 Implementation of popular bandit algorithms in batch environments. 
 
+Source code to our paper ["The Impact of Batch Learning in Stochastic Bandits"](https://arxiv.org/abs/2111.02071) accepted at the workshop on the [Ecological Theory of Reinforcement Learning](https://sites.google.com/view/ecorl2021/home?authuser=0), NeurIPS 2021
+
 ## Overview
 
 The repository provides an opportunuty to run simulations or replay logged datasets in _sequential batch_ manner -  sequential interaction with the environment when responses are grouped in batches and observed by the agent only at the end of each batch. Broadly speaking, sequential batch learning is a more generalized way of learning which covers both offline and online settings as special cases bringing together their advantages.
