@@ -25,10 +25,7 @@ class ReplayEnvironment(BaseEnvironment):
 
         directory = env_info['pickle_file']
         seed = env_info.get('seed', None)
-        if directory:
-            self.dataset = BanditDataset(directory, seed)
-        else:
-            self.dataset = env_info['dataset']
+        self.dataset = BanditDataset(directory, seed)
         self.idxs = range(self.dataset.__len__())
         self.counter = 0
 
