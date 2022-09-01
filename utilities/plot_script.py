@@ -6,7 +6,7 @@ def get_leveled_data(arr):
     """
 
     Args:
-        arr: list of lists os different length
+        arr: list of lists of different length
 
     Returns:
         average result over arr, axis=0

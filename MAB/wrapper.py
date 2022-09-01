@@ -38,9 +38,9 @@ class BanditWrapper(Policy):
         best_arm = []
         worst_arm = []
         all_chosen_arm = []
-        average_regret = []
+        average_regret = np.zeros((num_runs, num_steps))
 
-        for run in tqdm(range(num_runs)):
+        for run in range(num_runs):
             np.random.seed(seeds[run])
 
             self.rl_glue = RLGlue(self.env, self.agent)
@@ -77,13 +77,15 @@ class BanditWrapper(Policy):
             subopt_arm_average.append(subopt_arm)
             all_chosen_arm.append(chosen_arm_log)
 
-            average_regret.append(cum_regret)
+            average_regret[run, :] = cum_regret[1:]
 
         if return_type is None:
             returns = (np.mean(all_averages, axis=0),
                        np.mean(best_arm))
         elif return_type == 'regret':
             returns = np.mean(average_regret, axis=0)
+        elif return_type == 'full_regret':
+            returns = average_regret
         elif return_type == 'regret_reward':
             returns = (np.mean(average_regret, axis=0),
                        np.mean(all_averages, axis=0))

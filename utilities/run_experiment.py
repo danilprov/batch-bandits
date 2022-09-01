@@ -21,8 +21,9 @@ def run_experiment(environment, agent, environment_parameters, agent_parameters,
     for run in tqdm(range(1, experiment_parameters["num_runs"] + 1)):
         env_info["seed"] = run
 
+        max_steps = experiment_parameters.get('num_steps', 0)
         rl_glue.rl_init(agent_info, env_info)
-        rl_glue.rl_episode(0)
+        rl_glue.rl_episode(max_steps)
         agent_sum_reward.append(rl_glue.average_reward)
 
     leveled_result = get_leveled_data(agent_sum_reward)
